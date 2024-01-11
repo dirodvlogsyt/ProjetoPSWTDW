@@ -1,0 +1,31 @@
+.top-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+
+ 
+}
+
+.delivery-option, .location-section, .cart-button, .login-button, .signup-button {
+  
+  margin: 0 10px; 
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.login-button {
+  background-color: black; 
+}
+
+.signup-button {
+  background-color: black;
+}
+
+.cart-button{
+  background-color: black;
+  border-radius: 4px;
+}
+
+
+

@@ -1,0 +1,18 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+
+  }
+  
+  .login-form input[type="email"],
+  .login-form input[type="password"],
+  .login-form button {
+    width: 90%;
+    padding: 12px;
+    margin-bottom: 16px; 
+    border-radius: 1px;
+  }
+  
