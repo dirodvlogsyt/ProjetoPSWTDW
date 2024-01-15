@@ -19,6 +19,10 @@ const TopMenu = () => {
     navigate('/Cart');
   };
 
+  const handleReturn= ()=>{
+    navigate('')
+  }
+
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem('userName');
@@ -34,6 +38,7 @@ const TopMenu = () => {
           <button className="login-button" onClick={handleLogin}>Login</button>
           <button className="signup-button" onClick={handleSignUp}>Sign Up</button>
           <button className="cart-button" onClick={handleCart}>Carrinho</button>
+          <button className="Return-button" onClick={handleReturn}>Return</button>
         </>
       )}
       {isLoggedIn && (

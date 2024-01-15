@@ -7,6 +7,7 @@ import Login from './Login';
 import SignUp from './SignUp'; 
 import Cart from './Cart';
 import { CartProvider } from './CartContext';
+import DetalhesRestaurantes from './DetalhesRestaurantes';
 
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
         <Routes>
           <Route path="/Login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} /> 
-          <Route path="/DetalhesPPRestaurante" element={<DetalhesPPRestaurante />}/>
+          <Route path="/" element={<DetalhesPPRestaurante />}/>
+          /*<Route path="/Ver Menu Completo" element={<DetalhesRestaurantes/>}/>"*/
           <Route path="/Cart" element={<Cart/>}/>
         </Routes>
         </CartProvider>

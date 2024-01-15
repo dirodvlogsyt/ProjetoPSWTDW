@@ -1,31 +1,32 @@
+
 .top-menu {
   display: flex;
   justify-content: space-between;
-  align-items: left;
-
- 
-}
-
-.delivery-option, .location-section, .cart-button, .login-button, .signup-button {
-  
-  margin: 0 10px; 
+  align-items: right;
+  background-color: #282c34;
   padding: 10px 20px;
-  border: none;
-  cursor: pointer;
 }
 
-.login-button {
-  background-color: black; 
+.top-menu a, .top-menu button {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+
 }
 
-.signup-button {
-  background-color: black;
+.top-menu a:hover, .top-menu button:hover {
+  background-color: #61dafb; 
 }
 
-.cart-button{
-  background-color: black;
-  border-radius: 4px;
+@media (max-width: 768px) {
+  .top-menu {
+      flex-direction: column;
+  }
+
+  .top-menu a, .top-menu button {
+      margin-bottom: 10px;
+  }
 }
-
-
 
