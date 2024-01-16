@@ -4,7 +4,12 @@ import './TopMenu.css';
 
 const TopMenu = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
+
+  const handleAdminPage = () => {
+    navigate('/Restaurantes');
+  };
 
   const handleLogin = () => {
     navigate('/Login');
@@ -39,6 +44,8 @@ const TopMenu = () => {
           <button className="signup-button" onClick={handleSignUp}>Sign Up</button>
           <button className="cart-button" onClick={handleCart}>Carrinho</button>
           <button className="HomePage-button" onClick={handleReturn}>HomePage</button>
+          
+
         </>
       )}
       {isLoggedIn && (
@@ -48,6 +55,9 @@ const TopMenu = () => {
             <span className="logout-icon">🚪</span>
           </button>
         </>
+      )}
+      {isAdmin && (
+        <button className="admin-button" onClick={handleAdminPage}>Admin</button>
       )}
     </div>
   );
