@@ -1,7 +1,6 @@
 
 .top-menu {
   display: flex;
-  justify-content: space-between;
   align-items: right;
   background-color: #282c34;
   padding: 10px 20px;
@@ -28,5 +27,22 @@
   .top-menu a, .top-menu button {
       margin-bottom: 10px;
   }
+}
+
+.top-menu {
+  display: flex;
+  justify-content: flex-end; 
+  
+}
+
+.top-menu .button {
+  margin-left: 10px; 
+}
+.top-menu button {
+  margin-right: 50px; 
+}
+
+.top-menu button:last-child {
+  margin-right: 0;
 }
 
