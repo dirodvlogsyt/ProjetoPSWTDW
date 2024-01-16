@@ -1,18 +1,19 @@
-.restaurant-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+.restaurant-details {
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px; 
-  padding: 20px; 
+  justify-content: space-around; 
 }
 
-.restaurant-card {
-  border: 1px solid #ccc; 
-  border-radius: 8px; 
-  overflow: hidden; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  transition: box-shadow 0.3s ease; 
+.restaurant-details a {
+  display: inline-block; 
+  margin: 10px; 
+  text-align: center; 
 }
 
-.restaurant-card:hover {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+
+.restaurant-details img {
+  width: 100%; 
+  max-width: 200px; 
+  height: auto; 
 }

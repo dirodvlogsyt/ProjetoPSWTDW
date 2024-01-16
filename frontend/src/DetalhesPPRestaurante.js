@@ -3,6 +3,7 @@ import { Navigate, useHistory } from 'react-router-dom';
 import './DetalhesRestaurante.css';
 import DetalhesRestaurante from './DetalhesRestaurantes';
 import { useNavigate } from 'react-router-dom';
+import Sidebar from './sidebar';
 
 const DetalhesPPRestaurante = () => {
   let navigate = useNavigate();
@@ -14,12 +15,23 @@ const DetalhesPPRestaurante = () => {
 
   return (
     <div className="restaurant-details">
-      <img src="restaurant1.jpg" alt="Restaurant 1" />
-      <h2>Nome do Restaurante 1</h2>
-      <p>Tipo de restaurante e tipo de cozinha</p>
-      <p>Numero</p>
-      <button onClick={handleVerMenuClick}>Ver Menu Completo</button>
+      <a href="/DetalhesRestaurantes">
+      <img src="telepizza.png" alt="Restaurant 1" />
+    </a>
+  
+      <a href="/DetalhesRestaurantes">
+      <img src="pizzahut.png" alt="Restaurant 2" />
+      </a>
+
+      <a href="/DetalhesRestaurantes">
+      <img src="bk.png" alt="Restaurant 3" />
+      </a>
+      <a href="/DetalhesRestaurantes">
+      <img src="mc.png" alt="Restaurant 4" />
+      </a>
+
     </div>
+
 
   );
 };
