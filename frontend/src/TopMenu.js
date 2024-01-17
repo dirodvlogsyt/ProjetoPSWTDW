@@ -40,10 +40,11 @@ const TopMenu = () => {
      
       {!isLoggedIn && (
         <>
+          <button className="HomePage-button" onClick={handleReturn}>HomePage</button>
           <button className="login-button" onClick={handleLogin}>Login</button>
           <button className="signup-button" onClick={handleSignUp}>Sign Up</button>
           <button className="cart-button" onClick={handleCart}>Carrinho</button>
-          <button className="HomePage-button" onClick={handleReturn}>HomePage</button>
+          
           
 
         </>

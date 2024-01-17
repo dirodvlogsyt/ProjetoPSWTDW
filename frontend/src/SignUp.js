@@ -7,6 +7,8 @@ const SignUp = () => {
     email: '',
     senha:'',
     telefone: '',
+    contribuinte:'',
+    morada:'',
   });
 
   const handleChange = (e) => {
@@ -89,6 +91,28 @@ const SignUp = () => {
           type="tel"
           id="telefone"
           name="telefone"
+          value={formData.telefone}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="contribuinte">Número de Contribuinte:</label>
+        <input
+          type="cont"
+          id="contribuinte"
+          name="contribuinte"
+          value={formData.telefone}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="morada">Morada:</label>
+        <input
+          type="morada"
+          id="morada"
+          name="morada"
           value={formData.telefone}
           onChange={handleChange}
           required

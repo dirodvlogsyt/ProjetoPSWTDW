@@ -11,6 +11,7 @@ const DetalhesPPRestaurante = () => {
   const handleVerMenuClick = () => {
   
     navigate('/DetalhesRestaurantes');
+    
   };
 
   return (
