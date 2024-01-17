@@ -12,11 +12,11 @@ app.get('/DetalhesPPRestaurante', async (req, res) => {
   res.json(restaurants);
 });
 
-/* Rota para criar um novo restaurante
+
 app.post('/restaurants', async (req, res) => {
   const newRestaurant = await Restaurant.create(req.body);
   res.json(newRestaurant);
-});*/
+});
 
 app.listen(3000, () => {
   console.log('Servidor rodando na porta 3000');
