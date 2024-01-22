@@ -12,7 +12,9 @@ const RestaurantesAdmin = ({ isAdmin, verificarNomeRestaurante }) => {
     const [erro, setErro] = useState('');
 
     const handleChange = (e) => {
-        setNovoRestaurante({ ...novoRestaurante, [e.target.name]: e.target.value });
+        setNovoRestaurante({ ...
+            
+            novoRestaurante, [e.target.name]: e.target.value });
     };
 
     const salvarRestaurante = async () => {

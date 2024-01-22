@@ -1,126 +1,52 @@
-import React, { useState } from 'react';
-import './SignUp.css';
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const SignUp = () => {
-  const [formData, setFormData] = useState({
-    nome: '',
-    email: '',
-    senha:'',
-    telefone: '',
-    contribuinte:'',
-    morada:'',
-  });
+function SignUp() {
+    const [formData, setFormData] = useState({
+        nome: '',
+        email: '',
+        password: '',
+        telefone: '',
+        contribuinte: '',
+        morada: '',
+    });
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:3000/signup', formData, {
+                headers: { 'Content-Type': 'application/json' },
+            });
+            
+            console.log(response.data);
+            navigate('/DetalhesPPRestaurante'); 
+        } catch (error) {
+            setError(error.response?.data?.message || 'Erro ao realizar cadastro.');
+        }
+    };
 
-    if (!formData.nome.trim()) {
-      alert('Por favor, preencha o nome.');
-      return;
-    }
-
-    if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      alert('Por favor, insira um email válido.');
-      return;
-    }
-    if(!formData.senha.trim()){
-      alert('Por favor insira uma senha valida.')
-    }
-
-    if (!/^\d{9}$/.test(formData.telefone)) {
-      alert('O número de telefone deve ter 9 números.');
-      return;
-    }
-
-   
-    const registroBemSucedido = true; 
-
-    if (registroBemSucedido) {
-      alert('Registro bem-sucedido! Você será redirecionado.');
-      setTimeout(() => {
-        
-        window.location.href = '/DetalhesPPRestaurante'; 
-      }, 2000);
-    } else {
-     
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="signup-form">
-      <div>
-        <label htmlFor="nome">Nome:</label>
-        <input
-          type="text"
-          id="nome"
-          name="nome"
-          value={formData.nome}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="senha">Senha:</label>
-        <input
-          type="senha"
-          id="senha"
-          name="senha"
-          value={formData.senha}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="telefone">Telefone:</label>
-        <input
-          type="tel"
-          id="telefone"
-          name="telefone"
-          value={formData.telefone}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="contribuinte">Número de Contribuinte:</label>
-        <input
-          type="cont"
-          id="contribuinte"
-          name="contribuinte"
-          value={formData.telefone}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="morada">Morada:</label>
-        <input
-          type="morada"
-          id="morada"
-          name="morada"
-          value={formData.telefone}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <button type="submit" className="submit-button">Registrar</button>
-    </form>
-  );
-};
+    return (
+        <div>
+            <h2>Cadastro</h2>
+            <form onSubmit={handleSubmit}>
+                <input type="text" name="nome" value={formData.nome} onChange={handleChange} placeholder="Nome" required />
+                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
+                <input type="password" name="senha" value={formData.senha} onChange={handleChange} placeholder="Senha" required />
+                <input type="text" name="telefone" value={formData.telefone} onChange={handleChange} placeholder="Telefone" />
+                <input type="text" name="contribuinte" value={formData.contribuinte} onChange={handleChange} placeholder="NIF" required />
+                <input type="text" name="morada" value={formData.morada} onChange={handleChange} placeholder="Morada" required />
+                <button type="submit">Cadastrar</button>
+            </form>
+            {error && <p className="error">{error}</p>}
+        </div>
+    );
+}
 
 export default SignUp;

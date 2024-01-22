@@ -1,67 +1,58 @@
-import React, { useState } from 'react';
-import './Login.css';
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    senha: '',
-  });
-  const [showPassword, setShowPassword] = useState(false);
+function Login({ setUser }) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(false);
+    const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    const handleLogin = async (e) => {
+        e.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      alert('Por favor, insira um email válido.');
-      return;
-    }
-    if(!formData.senha.trim()){
-      alert('Por favor insira uma senha valida.')
-    }
-    const registroBemSucedido = true; 
+        try {
+            const response = await axios.post('http://localhost:3000/login', 
+                { email, password },
+                { headers: { 'Content-Type': 'application/json' } }
+            );
 
-    if (registroBemSucedido) {
-      alert('Registro bem-sucedido! Você será redirecionado.');
-      setTimeout(() => {
-        
-        window.location.href = '/DetalhesPPRestaurante'; 
-      }, 2000);
-    } else {
-     
-    }
-  };
-  return (
-    <div className="login-container">
-      <form onSubmit={handleSubmit} className="login-form">
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+            setUser(response.data); 
+            navigate('/DetalhesPPRestaurante');
+        } catch (error) {
+            if (!error.response) {
+                setError('Não foi possível conectar ao servidor.');
+            } else if (error.response?.status === 401) {
+                setError('Email ou senha incorretos.');
+            } else {
+                setError('Erro de login.');
+            }
+        }
+    };
+
+    return (
+        <div className="login-form-wrap">
+            {error && <p className="error">{error}</p>}
+            <form onSubmit={handleLogin}>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    required
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <button type="submit" className="btn-login">Login</button>
+            </form>
+          <p>{error}</p>
         </div>
-        <div>
-          <label htmlFor="senha">Senha:</label>
-          <input
-            type={showPassword ? "text" : "password"}
-            id="senha"
-            name="senha"
-            value={formData.senha}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit" className="submit-button">Entrar</button>
-      </form>
-    </div>
-  );
-};
+    );
+}
 
 export default Login;
