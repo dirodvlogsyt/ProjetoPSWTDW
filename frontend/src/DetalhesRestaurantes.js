@@ -1,37 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import './DetalhesRestaurante.css';
 
-function DetalhesRestaurante({ restaurant }) {
-    const [menuVisible, setMenuVisible] = useState(false);
+function DetalhesRestaurantes() {
+  const { id } = useParams();
+  const [restaurante, setRestaurante] = useState(null);
 
-    const toggleMenu = () => {
-        setMenuVisible(!menuVisible);
-    };
+  useEffect(() => {
+   
+    fetch(`sua_api/restaurantes/${id}`)
+      .then(res => res.json())
+      .then(data => setRestaurante(data))
+      .catch(erro => console.error('Erro:', erro));
+  }, [id]);
 
-    return (
-        <div className="restaurant-detail-container">
-            <img src={restaurant.imageUrl} alt={restaurant.name} className="restaurant-image" />
-            <div className="restaurant-info">
-                <h2>{restaurant.name}</h2>
-                <p><strong>Contacto:</strong> {restaurant.number}</p>
-                <p><strong>Tipo:</strong> {restaurant.type}</p>
-                <p><strong>Avaliação:</strong> {restaurant.rating}</p>
-                <button onClick={toggleMenu}>{menuVisible ? 'Esconder' : 'Ver'} Cardápio</button>
-                {menuVisible && (
-                    <div className="restaurant-menu">
-                        
-                        {restaurant.menu.map(item => (
-                            <div key={item.id} className="menu-item">
-                                <h4>{item.name}</h4>
-                                <p>{item.description}</p>
-                                <p><strong>Preço:</strong> {item.price}</p>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
-        </div>
-    );
+  if (!restaurante) return <div>Carregando...</div>;
+
+  return (
+    <div>
+      <h1>{restaurante.nome}</h1>
+    </div>
+  );
 }
 
-export default DetalhesRestaurante;
+export default DetalhesRestaurantes;

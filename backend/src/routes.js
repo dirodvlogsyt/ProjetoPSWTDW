@@ -56,7 +56,7 @@ routes.get('/DetalhesRestaurante', async (req, res) => {
     if (restaurantDetails) {
       res.status(200).json(restaurantDetails);
     } else {
-      res.status(404).send('Restaurant not found');
+      res.status(404).send('Restaurante não encontrado');
     }
   } catch (error) {
   
@@ -65,7 +65,7 @@ routes.get('/DetalhesRestaurante', async (req, res) => {
 });
 routes.post('/Restaurantes', async (req, res) => {
   try {
-    const novoRestaurante = new Restaurant(req.body);
+    const novoRestaurante = new Restaurantes(req.body);
     await novoRestaurante.save();
     res.status(201).send('Restaurante criado com sucesso');
   } catch (error) {
@@ -79,7 +79,7 @@ routes.put('/Restaurantes/:id', async (req, res) => {
     const { id } = req.params;
     const { nome, numero, morada, tipoCozinha, rating, horario } = req.body;
 
-    const restauranteAtualizado = await Restaurante.findByIdAndUpdate(id, {
+    const restauranteAtualizado = await Restaurantes.findByIdAndUpdate(id, {
       nome,
       numero,
       morada,
@@ -102,7 +102,7 @@ routes.put('/Restaurantes/:id', async (req, res) => {
 routes.delete('/restaurantes/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const restauranteDeletado = await Restaurante.findByIdAndDelete(id);
+    const restauranteDeletado = await Restaurantes.findByIdAndDelete(id);
 
     if (!restauranteDeletado) {
       return res.status(404).send('Restaurante não encontrado');

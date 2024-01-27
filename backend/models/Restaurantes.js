@@ -27,6 +27,10 @@ const RestauranteSchema = new Schema({
   horario: {
     type: String,
     required: true
+  },
+  imagem: {
+    type: String,
+    require: false
   }
 });
 

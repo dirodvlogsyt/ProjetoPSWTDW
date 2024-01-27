@@ -1,41 +1,32 @@
-import React from 'react';
-import { Navigate, useHistory } from 'react-router-dom';
-import './DetalhesRestaurante.css';
-import DetalhesRestaurante from './DetalhesRestaurantes';
-import { useNavigate } from 'react-router-dom';
-import Sidebar from './sidebar';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'; 
+import './DetalhesPPRestaurante.css';
 
-const DetalhesPPRestaurante = () => {
-  let navigate = useNavigate();
 
-  const handleVerMenuClick = () => {
-  
-    navigate('/DetalhesRestaurantes');
+function DetalhesPPRestaurante() {
+  const [restaurantes, setRestaurantes] = useState([]);
+
+  useEffect(() => {
     
-  };
+    fetch(`http://localhost:3000/api/Restaurantes`)
+      .then(res => res.json())
+      .then(data => setRestaurantes(data))
+      .catch(erro => console.error('Erro:', erro));
+  }, []);
 
+ 
   return (
-    <div className="restaurant-details">
-      <a href="/DetalhesRestaurantes">
-      <img src="telepizza.png" alt="Restaurant 1" />
-    </a>
-  
-      <a href="/DetalhesRestaurantes">
-      <img src="pizzahut.png" alt="Restaurant 2" />
-      </a>
-
-      <a href="/DetalhesRestaurantes">
-      <img src="bk.png" alt="Restaurant 3" />
-      </a>
-      <a href="/DetalhesRestaurantes">
-      <img src="mc.png" alt="Restaurant 4" />
-      </a>
-
+    <div className="container-de-restaurantes">
+      {restaurantes.map(restaurante => (
+        <div key={restaurante._id} className="item-de-restaurante">
+          <Link to={`/DetalhesRestaurantes/${restaurante._id}`}>
+            <img src={restaurante.imagemUrl} alt={restaurante.nome} />
+          </Link>
+          
+        </div>
+      ))}
     </div>
-
-
   );
-};
+}
 
 export default DetalhesPPRestaurante;
-
