@@ -40,6 +40,36 @@ const RestaurantesAdmin = ({ isAdmin, verificarNomeRestaurante }) => {
       };
       
 
+const atualizarRestaurante = async (id, dadosAtualizados) => {
+  try {
+    const resposta = await fetch(`/api/restaurantes/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dadosAtualizados)
+    });
+    if (resposta.ok) {
+     
+    }
+  } catch (error) {
+    console.error('Erro ao atualizar restaurante:', error);
+  }
+};
+
+
+const apagarRestaurante = async (id) => {
+  try {
+    const resposta = await fetch(`/api/restaurantes/${id}`, {
+      method: 'DELETE'
+    });
+    if (resposta.ok) {
+      
+    }
+  } catch (error) {
+    console.error('Erro ao apagar restaurante:', error);
+  }
+};
+
+
     if (!isAdmin) {
         return <p>Acesso negado. Apenas administradores podem acessar esta página.</p>;
     }

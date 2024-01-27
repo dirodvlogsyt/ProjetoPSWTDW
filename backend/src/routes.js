@@ -63,7 +63,7 @@ routes.get('/DetalhesRestaurante', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-app.post('/Restaurantes', async (req, res) => {
+routes.post('/Restaurantes', async (req, res) => {
   try {
     const novoRestaurante = new Restaurant(req.body);
     await novoRestaurante.save();
@@ -72,3 +72,62 @@ app.post('/Restaurantes', async (req, res) => {
     res.status(500).send('Erro ao criar restaurante');
   }
 });
+
+
+routes.put('/Restaurantes/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nome, numero, morada, tipoCozinha, rating, horario } = req.body;
+
+    const restauranteAtualizado = await Restaurante.findByIdAndUpdate(id, {
+      nome,
+      numero,
+      morada,
+      tipoCozinha,
+      rating,
+      horario
+    }, { new: true }); 
+
+    if (!restauranteAtualizado) {
+      return res.status(404).send('Restaurante não encontrado');
+    }
+
+    res.json(restauranteAtualizado);
+  } catch (error) {
+    res.status(500).send('Erro no servidor');
+  }
+});
+
+
+routes.delete('/restaurantes/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const restauranteDeletado = await Restaurante.findByIdAndDelete(id);
+
+    if (!restauranteDeletado) {
+      return res.status(404).send('Restaurante não encontrado');
+    }
+
+    res.send('Restaurante removido com sucesso');
+  } catch (error) {
+    res.status(500).send('Erro no servidor');
+  }
+});
+
+const verificarAdmin = (req, res, next) => {
+ 
+  if (req.user && req.user.role === 'ADMIN') {
+    next();
+  } else {
+    res.status(403).send('Acesso negado');
+  }
+};
+
+
+
+
+routes.get('/Restaurantes', verificarAdmin, (req, res) => {
+  res.send('Esta é uma área restrita para administradores.');
+});
+
+module.exports= routes;
