@@ -1,6 +1,6 @@
 .restaurant-detail-container {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     margin: 20px;
 }
 

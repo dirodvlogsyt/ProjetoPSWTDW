@@ -20,7 +20,7 @@ routes.post('/login', async (req, res) => {
 
 
 routes.post('/signup', async (req, res) => {
-  const { name, email, password, nrcontribuinte, morada } = req.body;
+  const { name, email, password, nif, morada } = req.body;
   try {
     const userExists = await User.findOne({ email: email });
     if (userExists) {
@@ -31,13 +31,14 @@ routes.post('/signup', async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      nrcontribuinte,
+      nif,
       morada
     });
     await newUser.save();
     res.status(201).send({ message: 'Usuário criado com sucesso!', user: newUser });
   } catch (error) {
-    res.status(500).send({ message: 'Erro ao criar usuário' });
+    console.error(error);
+    res.status(500).send({ message: 'Erro ao criar usuário', error: error.message });
   }
 });
 

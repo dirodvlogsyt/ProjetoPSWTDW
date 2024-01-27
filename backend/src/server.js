@@ -8,9 +8,7 @@ app.use(express.json());
 app.use(cors());
 app.use(routes);
 
-mongoose.connect('mongodb://localhost:27017/Accounts.users',{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+mongoose.connect('mongodb://localhost:27017/Accounts',{
 });
  
 app.get('/', (req, res) =>{
@@ -19,4 +17,4 @@ app.get('/', (req, res) =>{
 
 app.listen(3000, ()=>{
     console.log('A rodar na porta 3000');
-});ze
+});

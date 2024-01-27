@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
     const [formData, setFormData] = useState({
-        nome: '',
+        name: '',
         email: '',
         password: '',
         telefone: '',
-        contribuinte: '',
+        nif: '',
         morada: '',
     });
     const [error, setError] = useState('');
@@ -36,11 +36,11 @@ function SignUp() {
         <div>
             <h2>Cadastro</h2>
             <form onSubmit={handleSubmit}>
-                <input type="text" name="nome" value={formData.nome} onChange={handleChange} placeholder="Nome" required />
+                <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Nome" required />
                 <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
-                <input type="password" name="senha" value={formData.senha} onChange={handleChange} placeholder="Senha" required />
+                <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Senha" required />
                 <input type="text" name="telefone" value={formData.telefone} onChange={handleChange} placeholder="Telefone" />
-                <input type="text" name="contribuinte" value={formData.contribuinte} onChange={handleChange} placeholder="NIF" required />
+                <input type="text" name="nif" value={formData.nif} onChange={handleChange} placeholder="NIF" required />
                 <input type="text" name="morada" value={formData.morada} onChange={handleChange} placeholder="Morada" required />
                 <button type="submit">Cadastrar</button>
             </form>
