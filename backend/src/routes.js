@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/User'); 
 const routes = express.Router();
+const Restaurantes = require('../models/Restaurantes');
 
 
 routes.post('/login', async (req, res) => {
@@ -42,4 +43,32 @@ routes.post('/signup', async (req, res) => {
   }
 });
 
-module.exports = routes;
+routes.get('/DetalhesRestaurante', async (req, res) => {
+  
+
+  const restaurantId = req.query.id;
+
+  try {
+   
+    const restaurantDetails = await Restaurant.findById(restaurantId);
+
+   
+    if (restaurantDetails) {
+      res.status(200).json(restaurantDetails);
+    } else {
+      res.status(404).send('Restaurant not found');
+    }
+  } catch (error) {
+  
+    res.status(500).send('Server error');
+  }
+});
+app.post('/Restaurantes', async (req, res) => {
+  try {
+    const novoRestaurante = new Restaurant(req.body);
+    await novoRestaurante.save();
+    res.status(201).send('Restaurante criado com sucesso');
+  } catch (error) {
+    res.status(500).send('Erro ao criar restaurante');
+  }
+});

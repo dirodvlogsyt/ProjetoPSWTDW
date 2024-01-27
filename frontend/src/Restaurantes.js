@@ -16,24 +16,29 @@ const RestaurantesAdmin = ({ isAdmin, verificarNomeRestaurante }) => {
             
             novoRestaurante, [e.target.name]: e.target.value });
     };
-
+    
     const salvarRestaurante = async () => {
-        if (!novoRestaurante.nome || !novoRestaurante.horario || !novoRestaurante.tipoComida || !novoRestaurante.telefone) {
-            setErro('Todos os campos são obrigatórios');
-            return;
+        
+        try {
+          const resposta = await fetch('/caminho_da_sua_api', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              nome: nomeRestaurante,
+              horario: horarioRestaurante,
+              tipo: tipoComida,
+              telefone: telefoneRestaurante
+            }),
+          });
+          const dados = await resposta.json();
+          
+        } catch (error) {
+          console.error('Erro ao salvar restaurante:', error);
         }
-
-       
-        const nomeExiste = await verificarNomeRestaurante(novoRestaurante.nome);
-        if (nomeExiste) {
-            setErro('Nome do restaurante já existe');
-            return;
-        }
-
-       
-
-        setErro(''); 
-    };
+      };
+      
 
     if (!isAdmin) {
         return <p>Acesso negado. Apenas administradores podem acessar esta página.</p>;

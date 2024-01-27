@@ -4,11 +4,12 @@ const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 
+
 app.use(express.json());
 app.use(cors());
 app.use(routes);
 
-mongoose.connect('mongodb://localhost:27017/Accounts',{
+mongoose.connect('mongodb://localhost:27017/Projeto',{
 });
  
 app.get('/', (req, res) =>{
