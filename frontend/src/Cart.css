@@ -2,9 +2,7 @@
     width: 300px;
     padding: 20px;
     margin: auto;
-    border-radius: 5px;
-    
-   
+    border-radius: 5px; 
   }
   
   .cart-item {
@@ -13,9 +11,12 @@
     align-items: center;
     margin-bottom: 10px;
   }
+
   
   .cart-item span {
     margin-right: 10px;
+  color: darkgreen;  
+  
   }
   
   
