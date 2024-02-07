@@ -9,10 +9,11 @@ routes.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email: email });
-    if (user && await bcrypt.compare(password, user.password)) {
+    if (user){
+      await bcrypt.compare(password, user.password)
       res.status(200).json({ message: "Login bem-sucedido!", user });
     } else {
-      res.status(401).json({ message: "Credenciais inválidas" });
+      res.status(401).json({ message: "User não encontrado" });
     }
   } catch (error) {
     res.status(500).json({ message: "Erro no servidor" });
@@ -21,7 +22,8 @@ routes.post('/login', async (req, res) => {
 
 
 routes.post('/signup', async (req, res) => {
-  const { name, email, password, nif, morada } = req.body;
+  const { name, email, password, nif, morada, telefone } = req.body;
+  console.log(name, email, password, nif, morada, telefone)
   try {
     const userExists = await User.findOne({ email: email });
     if (userExists) {
@@ -33,8 +35,9 @@ routes.post('/signup', async (req, res) => {
       email,
       password: hashedPassword,
       nif,
-      morada
-    });
+      morada,
+      telefone
+        });
     await newUser.save();
     res.status(201).send({ message: 'Usuário criado com sucesso!', user: newUser });
   } catch (error) {

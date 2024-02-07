@@ -1,19 +1,19 @@
-.restaurant-details {
+.container-de-restaurantes {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; 
   justify-content: space-around; 
+  gap: 20px;
 }
 
-.restaurant-details a {
-  display: inline-block; 
-  margin: 10px; 
-  text-align: center; 
+.item-de-restaurante {
+  flex: 1 1 200px; 
+  max-width: calc(25% - 40px); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-.restaurant-details img {
+.item-de-restaurante img {
   width: 100%; 
-  max-width: 200px; 
   height: auto; 
+  display: block;
 }
+

@@ -1,24 +1,26 @@
-import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { fazerLogin } from './LoginFuncao'
 
-function Login({ setUser }) {
+
+ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
     const navigate = useNavigate();
+    const [user, setUser]= useState()
+   
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:3000/login', 
-                { email, password },
-                { headers: { 'Content-Type': 'application/json' } }
-            );
-
-            setUser(response.data); 
+            
+            const response = fazerLogin(email, password)
+            setUser(response)
+            setUser(response)
             navigate('/DetalhesPPRestaurante');
+            
         } catch (error) {
             if (!error.response) {
                 setError('Não foi possível conectar ao servidor.');
@@ -29,6 +31,11 @@ function Login({ setUser }) {
             }
         }
     };
+
+    useEffect(()=>{
+        console.log(user)
+    },[user])
+
 
     return (
         <div className="login-form-wrap">
@@ -48,7 +55,7 @@ function Login({ setUser }) {
                     required
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit" className="btn-login">Login</button>
+                <button type="submit" className="btn-login" >Login</button>
             </form>
           <p>{error}</p>
         </div>

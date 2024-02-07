@@ -9,20 +9,18 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
   },
   password: {
     type: String,
     required: true,
   },
   telefone: {
-    type: String,
+    type: Number,
     required: true,
   },
   nif: {
-    type: String,
+    type: Number,
     required: true,
-    unique: true, 
   },
   morada: {
     type: String,
@@ -30,10 +28,9 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['ADMIN', 'USER'],
+    enum: ['ADMIN', 'USER', 'Restaurant'],
     default: 'USER'
   }
-  
 });
 
 
