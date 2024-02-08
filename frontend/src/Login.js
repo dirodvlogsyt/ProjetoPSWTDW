@@ -18,8 +18,10 @@ import { fazerLogin } from './LoginFuncao'
             
             const response = fazerLogin(email, password)
             setUser(response)
-            setUser(response)
-            navigate('/DetalhesPPRestaurante');
+            if(user){
+                navigate('/');
+            }
+            
             
         } catch (error) {
             if (!error.response) {

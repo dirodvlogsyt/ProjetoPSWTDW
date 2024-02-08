@@ -25,7 +25,7 @@ const TopMenu = () => {
   };
 
   const handleReturn= ()=>{
-    navigate('')
+    navigate('/')
   }
 
   const handleLogout = () => {

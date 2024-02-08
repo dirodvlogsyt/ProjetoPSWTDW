@@ -1,30 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; 
 import './DetalhesPPRestaurante.css';
+import { getTodosOsRestaurantes } from './LoginFuncao'
 
 
 function DetalhesPPRestaurante() {
   const [restaurantes, setRestaurantes] = useState([]);
 
-  useEffect(() => {
-    
-    fetch(`http://localhost:3000/api/Restaurantes`)
-      .then(res => res.json())
-      .then(data => setRestaurantes(data))
-      .catch(erro => console.error('Erro:', erro));
-  }, []);
+useEffect(()=>{
+  const obterRestaurantes= async ()=>{
+    const restaurantes = await getTodosOsRestaurantes()
+    try{
+    setRestaurantes(restaurantes)
+    }
+    catch{
+      console.log("Problema no get dos restaurantes")
+    }
+  }
+
+  obterRestaurantes()
+})
+
+useEffect(()=>{
+console.log(restaurantes)
+},[])
 
  
   return (
-    <div className="container-de-restaurantes">
+<div>   
+  <h1>Bem Vindo !!!</h1>
+
+   <ul className="lista">
       {restaurantes.map(restaurante => (
-        <div key={restaurante._id} className="item-de-restaurante">
-          <Link to={`/DetalhesRestaurantes/${restaurante._id}`}>
-            <img src={restaurante.imagemUrl} alt={restaurante.nome} />
-          </Link>
-          
+        <li className='galeria'>
+        <div >
+          <h2>{restaurante.nome}</h2>
+          <h2>{restaurante.numero}</h2>
+
+            <img className='img' src={restaurante.imagem} alt={restaurante.nome} />
         </div>
+</li>
       ))}
+      </ul>
     </div>
   );
 }

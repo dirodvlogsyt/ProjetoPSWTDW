@@ -23,7 +23,7 @@ export const fazerLogin = (email, password) => {
     });
   };
 
-  export const fazerSignup = ( email, name , telefone, nif, morada, password)=>{
+  export const fazerSignup = ( email, name , telefone, nif, morada, password,Idrestaurante)=>{
     fetch('http://localhost:3000/user/signup', {
       method: 'POST',
       headers: {
@@ -36,6 +36,7 @@ export const fazerLogin = (email, password) => {
         nif:nif,
         morada:morada,
         password: password,
+        Idrestaurante: Idrestaurante
       })
 
     })
@@ -53,4 +54,25 @@ export const fazerLogin = (email, password) => {
     });
 
   }
+
+
+  export const getTodosOsRestaurantes = () => {
+    return fetch('http://localhost:3000/user/DetalhesRestaurante', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .catch((err) => {
+      console.log(err + "huhuuhuhu");
+    });
+  }
+
+
   

@@ -1,19 +1,23 @@
-.container-de-restaurantes {
-  display: flex;
+.galeria{
+  background-color: aliceblue;
+  width: 5%;
+  height: auto;
+  margin: 1%;
+  padding: 1% 9% 2% 8.5%;
+  border-radius: 20px;
+  transition: box-shadow 1s;
+}
+.galeria:hover{
+  box-shadow: 13px 14px 40px 0px rgba(0,0,0,0.75);
+}
+
+.lista{
+  list-style: none;
+  display: flex ;
   flex-wrap: wrap;
-  justify-content: space-around; 
-  gap: 20px;
-}
 
-.item-de-restaurante {
-  flex: 1 1 200px; 
-  max-width: calc(25% - 40px); 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-.item-de-restaurante img {
-  width: 100%; 
-  height: auto; 
-  display: block;
+.img{
+  width: 150%;
+  height: auto;
 }
-

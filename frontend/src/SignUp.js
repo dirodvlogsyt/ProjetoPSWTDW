@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fazerSignup } from './LoginFuncao';
+import { getTodosOsRestaurantes } from './LoginFuncao'
+//id + 1
 
 function SignUp() {
     const [morada, setMorada] = useState()
@@ -10,18 +12,40 @@ function SignUp() {
     const [email, setEmail] = useState()
     const [name, setName] = useState()
     const [newUser, setNewUser] = useState()
-    
     const [error, setError] = useState('');
+    const [restaurantes, setRestaurantes] = useState()
+    const [Idrestaurante, setIdRestaurante] = useState()
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchRestaurantes = async () => {
+          try {
+            const todosOsRestaurantes = await getTodosOsRestaurantes();
+            setRestaurantes(todosOsRestaurantes);
+          } catch (error) {
+            console.error('Erro ao buscar os restaurantes:', error);
+          }
+        };
+      
+        fetchRestaurantes();
+      }, []);
+
+      useEffect(()=>{
+        if(restaurantes){
+            setIdRestaurante(restaurantes.length  + 1)
+        }
+      },restaurantes)
+      
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            //restauanteId
             console.log("1")
-            const User = fazerSignup( name, email, password, nif, morada, telefone)
+            const User = fazerSignup( email, name , telefone, nif, morada, password)
             console.log("2")
             setNewUser(User)
-            navigate('/DetalhesPPRestaurante'); 
+            navigate('/'); 
         } catch (error) {
             setError(error.response?.data?.message || 'Erro ao realizar cadastro.');
         }

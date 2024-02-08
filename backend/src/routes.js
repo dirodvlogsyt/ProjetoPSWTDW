@@ -22,8 +22,8 @@ routes.post('/login', async (req, res) => {
 
 
 routes.post('/signup', async (req, res) => {
-  const { name, email, password, nif, morada, telefone } = req.body;
-  console.log(name, email, password, nif, morada, telefone)
+  const { email, name , telefone, nif, morada, password } = req.body;
+  console.log(email, name , telefone, nif, morada, password)
   try {
     const userExists = await User.findOne({ email: email });
     if (userExists) {
@@ -31,12 +31,14 @@ routes.post('/signup', async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
-      name,
+      
       email,
-      password: hashedPassword,
+      name,
+      telefone,
       nif,
       morada,
-      telefone
+      password: hashedPassword,
+      
         });
     await newUser.save();
     res.status(201).send({ message: 'Usuário criado com sucesso!', user: newUser });
@@ -46,35 +48,64 @@ routes.post('/signup', async (req, res) => {
   }
 });
 
-routes.get('/DetalhesRestaurante', async (req, res) => {
+
+
+routes.get('/DetalhesRestaurante/:restauranteId', async (req, res) => {
   
-
-  const restaurantId = req.query.id;
-
+  const restauranteId = req.params.restauranteId;
   try {
-   
-    const restaurantDetails = await Restaurant.findById(restaurantId);
-
-   
+    const restaurantDetails = await Restaurantes.findById(restauranteId);   
     if (restaurantDetails) {
       res.status(200).json(restaurantDetails);
     } else {
       res.status(404).send('Restaurante não encontrado');
     }
   } catch (error) {
-  
-    res.status(500).send('Server error');
+    res.status(500).send(error);
   }
 });
+
+
+routes.get('/DetalhesRestaurante', async (req, res) => {
+  try {
+    const restaurantDetails = await Restaurantes.find();   
+    if (restaurantDetails.length > 0) {
+      console.log(restaurantDetails.length)
+      res.status(200).json(restaurantDetails);
+    } else {
+      console.log("Nenhum restaurante encontrado")
+      res.status(400)
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+
+
+
 routes.post('/Restaurantes', async (req, res) => {
   try {
-    const novoRestaurante = new Restaurantes(req.body);
+
+    const { nome, numero, morada, tipoCozinha, horario, imagem, restauranteId } = req.body;
+    const novoRestaurante = new Restaurantes({
+      nome,
+      numero,
+      morada,
+      tipoCozinha,
+      horario,
+      imagem,
+      restauranteId
+    });
+
     await novoRestaurante.save();
     res.status(201).send('Restaurante criado com sucesso');
   } catch (error) {
+
     res.status(500).send('Erro ao criar restaurante');
   }
 });
+
 
 
 routes.put('/Restaurantes/:id', async (req, res) => {
