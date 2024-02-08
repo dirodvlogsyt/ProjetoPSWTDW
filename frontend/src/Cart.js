@@ -21,8 +21,8 @@ const Cart = () => {
           <button onClick={() => removeItem(item.id)}>Remover</button>
         </div>
       ))}
-      <button onClick={clearCart}>Limpar Carrinho</button>
-      <button onClick={handleCheckout}>Checkout</button>
+      <button type="limpar" onClick={clearCart}>Limpar Carrinho</button>
+      <button type="checkout" onClick={handleCheckout}>Checkout</button>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fazerSignup } from './LoginFuncao';
 import { getTodosOsRestaurantes } from './LoginFuncao'
+import './SignUp.css';
 //id + 1
 
 function SignUp() {
@@ -63,12 +64,12 @@ function SignUp() {
         <div>
             <h2>Cadastro</h2>
             <form onSubmit={handleSubmit}>
-                <input type="text" name="name" onChange={(e) => setName(e.target.value)} placeholder="Nome" required />
+                <input type="name" name="name" onChange={(e) => setName(e.target.value)} placeholder="Nome" required />
                 <input type="email" name="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
                 <input type="password" name="password" onChange={(e) => setPassword(e.target.value)} placeholder="Senha" required />
-                <input type="text" name="telefone" onChange={(e) => setTelefone(e.target.value)} placeholder="Telefone" />
-                <input type="text" name="nif" onChange={(e) => setNif(e.target.value)} placeholder="NIF" required />
-                <input type="text" name="morada" onChange={(e) => setMorada(e.target.value)} placeholder="Morada" required />
+                <input type="tel" name="telefone" onChange={(e) => setTelefone(e.target.value)} placeholder="Telefone" />
+                <input type="nif" name="nif" onChange={(e) => setNif(e.target.value)} placeholder="NIF" required />
+                <input type="morada" name="morada" onChange={(e) => setMorada(e.target.value)} placeholder="Morada" required />
                 <button type="submit">Cadastrar</button>
             </form>
             {error && <p className="error">{error}</p>}
