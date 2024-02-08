@@ -4,8 +4,8 @@ import { fazerLogin } from './LoginFuncao'
 
 
  function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
     const [error, setError] = useState(false);
     const navigate = useNavigate();
     const [user, setUser]= useState()
@@ -21,7 +21,6 @@ import { fazerLogin } from './LoginFuncao'
             if(user){
                 navigate('/');
             }
-            
             
         } catch (error) {
             if (!error.response) {
@@ -41,6 +40,7 @@ import { fazerLogin } from './LoginFuncao'
 
     return (
         <div className="login-form-wrap">
+            <h1>Login</h1>
             {error && <p className="error">{error}</p>}
             <form onSubmit={handleLogin}>
                 <input

@@ -1,5 +1,5 @@
 export const fazerLogin = (email, password) => {
-    fetch('http://localhost:3000/user/login', {
+    fetch('http://localhost:5000/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ export const fazerLogin = (email, password) => {
   };
 
   export const fazerSignup = ( email, name , telefone, nif, morada, password,Idrestaurante)=>{
-    fetch('http://localhost:3000/user/signup', {
+    fetch('http://localhost:5000/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -57,20 +57,18 @@ export const fazerLogin = (email, password) => {
 
 
   export const getTodosOsRestaurantes = () => {
-    return fetch('http://localhost:3000/user/DetalhesRestaurante', {
+    return fetch('http://localhost:5000/user/DetalhesRestaurante', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     })
+    .then(response => response.json())
     .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
+      return response;
     })
     .catch((err) => {
-      console.log(err + "huhuuhuhu");
+      console.log(err);
     });
   }
 

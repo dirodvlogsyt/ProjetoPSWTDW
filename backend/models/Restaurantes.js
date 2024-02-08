@@ -31,8 +31,12 @@ const RestauranteSchema = new Schema({
   imagem: {
     type: String,
     require: false
-  }
-});
+  },
+  id: {
+    type: Number,
+    require: true
+  }}
+);
 
 const Restaurante = mongoose.model('Restaurante', RestauranteSchema);
 

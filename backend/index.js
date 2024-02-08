@@ -12,11 +12,11 @@ app.use(cors());
 
 app.use('/user', Router);
 
-mongoose.connect('mongodb://localhost:27017/Projeto',{
+mongoose.connect('mongodb+srv://rubenflorentino2:HKV5NO9DxhKI5mE1@cluster0.z2f4luk.mongodb.net/Projeto',{
 });
  
 
 
-app.listen(3000, ()=>{
-    console.log('A rodar na porta 3000');
+app.listen(5000, ()=>{
+    console.log('A rodar na porta 5000');
 });

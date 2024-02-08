@@ -2,13 +2,14 @@
   background-color: aliceblue;
   width: 5%;
   height: auto;
-  margin: 1%;
-  padding: 1% 9% 2% 8.5%;
+  margin: 2% 4%;
+  padding: 1% 11% 2% 8.6%;
   border-radius: 20px;
   transition: box-shadow 1s;
+ 
 }
 .galeria:hover{
-  box-shadow: 13px 14px 40px 0px rgba(0,0,0,0.75);
+  box-shadow: 20px 20px 60px 10px rgba(255, 255, 255, 0.75);
 }
 
 .lista{
@@ -20,4 +21,23 @@
 .img{
   width: 150%;
   height: auto;
+  border-radius: 20px;
+}
+
+.gg{
+  margin-left: -65px;
+  width: 300%;
+}
+
+
+.ggy{
+  margin-left: -65px;
+  margin-top: 50px;
+  width: 300%;
+}
+
+.rat{
+  border-color: yellow;
+  margin-left: -85px;
+  width: 300%;
 }

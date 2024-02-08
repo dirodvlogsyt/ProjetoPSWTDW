@@ -3,8 +3,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background-color: rgb(214, 196, 178); 
   color: #333; 
+  background-image: url("https://i.pinimg.com/736x/3a/4f/11/3a4f11a7688b1b65553b60847f855283.jpg");
+  background-size: 100%;
+
 }
 
 .App {

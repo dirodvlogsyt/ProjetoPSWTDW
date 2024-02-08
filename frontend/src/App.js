@@ -20,8 +20,9 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} /> 
           <Route path="/" element={<DetalhesPPRestaurante />}/>
-          <Route path="/Ver Menu Completo" element={<DetalhesRestaurantes/>}/>
+          <Route path='/Restaurante/:id'  element={<DetalhesRestaurantes/>}/>
           <Route path="/Cart" element={<Cart/>}/>
+        
         </Routes>
         </CartProvider>
       </BrowserRouter>

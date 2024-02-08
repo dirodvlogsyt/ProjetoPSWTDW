@@ -1,11 +1,11 @@
 
-.top-menu {
-  display: flex;
-  align-items: right;
-  background-color: #282c34;
-  padding: 10px 20px;
+.top-menu {background-color: #fff;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px 20px;
 }
-
 .top-menu a, .top-menu button {
   color: rgb(12, 5, 5);
   text-decoration: none;

@@ -20,6 +20,7 @@ function DetalhesRestaurantes() {
       .catch(erro => console.error('Erro:', erro));
   }, [id]);
 
+  
   if (!restaurante) return <div>Carregando...</div>; 
 
  
