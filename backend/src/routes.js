@@ -157,6 +157,34 @@ const verificarAdmin = (req, res, next) => {
   }
 };
 
+routes.post('/cardapio', async (req, res) => {
+  try {
+    const { restauranteId, pratos } = req.body;
+    const novoCardapio = new Cardapio({
+      restaurante: restauranteId,
+      pratos
+    });
+
+    await novoCardapio.save();
+    res.status(201).send('Cardápio criado com sucesso');
+  } catch (error) {
+    res.status(500).send('Erro ao criar cardápio');
+  }
+});
+
+
+routes.get('/cardapio/:restauranteId?', async (req, res) => {
+  try {
+    const { restauranteId } = req.params;
+    const query = restauranteId ? { restaurante: restauranteId } : {};
+    const cardapios = await Cardapio.find(query).populate('pratos');
+    
+    res.status(200).json(cardapios);
+  } catch (error) {
+    res.status(500).send('Erro ao buscar cardápios');
+  }
+});
+
 
 
 module.exports= routes;

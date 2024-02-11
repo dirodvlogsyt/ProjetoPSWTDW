@@ -1,19 +1,16 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const pratoSchema = new mongoose.Schema({
+const pratoSchema = new Schema({
   nome: { type: String, required: true },
   categoria: { type: String, required: true, enum: ['Peixe', 'Carne', 'Vegetariano', 'Sobremesa'] },
   preco: { type: Number, required: true },
   imagemUrl: { type: String, required: true },
-  descricao: String
+  descricao: { type: String, required: false }
 });
 
-const cardapioSchema = new mongoose.Schema({
-  restaurante: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Restaurante',
-    required: true
-  },
+const cardapioSchema = new Schema({
+  restauranteId: { type: Number, required: true },
   pratos: [pratoSchema]
 });
 

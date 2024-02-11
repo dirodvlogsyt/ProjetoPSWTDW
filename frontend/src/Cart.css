@@ -1,54 +1,53 @@
+/* Cart.css */
 
-button[type="limpar"] {
-  background-color: #ff6b6b;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: all 0.3s ease;
-}
-
-button[type="limpar"]:hover {
-  background-color: #ff4757;
-  transform: translateY(-2px);
-}
-
-button[type="checkout"] {
-  background-color: #111213;
-  color: white;
-  padding: 10px 15px;
-  margin-left: 30px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: all 0.3s ease;
-}
-
-button[type="checkout"]:hover {
-  background-color: #0abde3;
-  transform: translateY(-2px);
-}
-
+/* Estilos para o container do carrinho */
 .cart-container {
-  max-width: 400px;
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 700px; /* Ajuste conforme necessário */
+  margin: 40px auto; /* Centraliza o container na página */
   padding: 20px;
-  background: #ffffff;
-  margin-top: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  background-color: #ffffff; /* Cor de fundo do container */
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
-.cart-title {
-  margin-bottom: 20px;
+/* Estilos para cada item do carrinho */
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px; /* Espaçamento entre os itens */
+  padding: 10px;
+  background-color: #f9f9f9; /* Cor de fundo para cada item */
+  border-radius: 4px; /* Bordas arredondadas para cada item */
 }
 
+/* Estilos para o nome e quantidade do item */
+.item-name, .item-amount {
+  font-weight: 500; /* Peso da fonte */
+}
 
-.empty-cart-message {
-  color: #555;
-  margin-bottom: 20px;
+/* Estilos para os botões de aumentar e diminuir a quantidade e remover item */
+.cart-item button {
+  padding: 5px 8px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: #e0e0e0; /* Cor de fundo dos botões */
+  cursor: pointer;
+}
+
+.cart-item button:hover {
+  background-color: #d0d0d0; /* Cor de fundo dos botões ao passar o mouse */
+}
+
+/* Estilos específicos para o botão de remover */
+.remove-item-button {
+  background-color: #ff6b6b; /* Cor de fundo do botão de remover */
+  color: #ffffff; /* Cor do texto do botão de remover */
+}
+
+.remove-item-button:hover {
+  background-color: #ff5252; /* Cor de fundo do botão de remover ao passar o mouse */
 }

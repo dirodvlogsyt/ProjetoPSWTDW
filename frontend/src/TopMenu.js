@@ -34,6 +34,9 @@ const TopMenu = () => {
 
   };
   
+  const handleUser= ()=>{
+    navigate('/GestãoDeUsuários')
+  }
 
   return (
     <div className="top-menu">
@@ -44,7 +47,8 @@ const TopMenu = () => {
           <button className="login-button" onClick={handleLogin}>Login</button>
           <button className="signup-button" onClick={handleSignUp}>Sign Up</button>
           <button className="cart-button" onClick={handleCart}>Carrinho</button>
-          
+          <button className="admin-button" onClick={handleAdminPage}>Admin</button>
+          <button className="admin-button" onClick={handleUser}>Gestão De USuários</button>
           
 
         </>

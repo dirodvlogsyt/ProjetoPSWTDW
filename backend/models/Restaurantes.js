@@ -32,6 +32,12 @@ const RestauranteSchema = new Schema({
     type: String,
     require: false
   },
+  
+  nrEstablecimentos:{
+    type: Number,
+    require: true
+  },
+
   id: {
     type: Number,
     require: true

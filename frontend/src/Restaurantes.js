@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './Restaurantes.css';
 
-const RestaurantesAdmin = ({ isAdmin, verificarNomeRestaurante }) => {
+
+
+const Restaurantes = () => {
     const [restaurantes, setRestaurantes] = useState([]);
     const [novoRestaurante, setNovoRestaurante] = useState({
         nome: '',
@@ -18,31 +20,26 @@ const RestaurantesAdmin = ({ isAdmin, verificarNomeRestaurante }) => {
     };
     
     const salvarRestaurante = async () => {
-        
-        try {
-          const resposta = await fetch('/caminho_da_sua_api', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              nome: nomeRestaurante,
-              horario: horarioRestaurante,
-              tipo: tipoComida,
-              telefone: telefoneRestaurante
-            }),
+      try {
+          const resposta = await fetch('', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(novoRestaurante),
           });
           const dados = await resposta.json();
           
-        } catch (error) {
+      } catch (error) {
           console.error('Erro ao salvar restaurante:', error);
-        }
-      };
+      }
+  };
+  
       
 
 const atualizarRestaurante = async (id, dadosAtualizados) => {
   try {
-    const resposta = await fetch(`/api/restaurantes/${id}`, {
+    const resposta = await fetch(`http://localhost:5000/restaurantes/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(dadosAtualizados)
@@ -58,7 +55,7 @@ const atualizarRestaurante = async (id, dadosAtualizados) => {
 
 const apagarRestaurante = async (id) => {
   try {
-    const resposta = await fetch(`/api/restaurantes/${id}`, {
+    const resposta = await fetch(`http://localhost:5000/restaurantes/${id}`, {
       method: 'DELETE'
     });
     if (resposta.ok) {
@@ -69,10 +66,6 @@ const apagarRestaurante = async (id) => {
   }
 };
 
-
-    if (!isAdmin) {
-        return <p>Acesso negado. Apenas administradores podem acessar esta página.</p>;
-    }
 
     return (
         <div className="restaurantes-admin">
@@ -88,4 +81,4 @@ const apagarRestaurante = async (id) => {
     );
 };
 
-export default RestaurantesAdmin;
+export default Restaurantes;

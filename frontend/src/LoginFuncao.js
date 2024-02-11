@@ -16,7 +16,7 @@ export const fazerLogin = (email, password) => {
       return response.json();
     })
     .then(data => {
-      console.log(data); // Você pode lidar com os dados da resposta aqui
+      console.log(data);
     })
     .catch(error => {
       console.error('Houve um problema com a solicitação de login:', error);
@@ -73,4 +73,79 @@ export const fazerLogin = (email, password) => {
   }
 
 
+  export const buscarCardapio = async (idRestaurante) => {
+    try {
+      const response = await fetch(`http://localhost:5000/restaurante/cardapio/${idRestaurante}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Houve um problema com a solicitação do cardápio:', error);
+    }
+  };
   
+export const buscarOpcoesDoItem = (itemId) => {
+  return fetch(`http://localhost:5000/restaurante/cardapio/opcoes/${itemId}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Falha ao buscar opções do item');
+      }
+      return response.json();
+    })
+    .catch(error => console.error('Erro na API:', error));
+};
+
+export const adicionarTagAoUsuario = async (userId, tag) => {
+ 
+  try {
+    const response = await fetch(`http://localhost:5000/user/${userId}/tags`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ tag }),
+    });
+    return response.json();
+  } catch (error) {
+    console.error('Erro ao adicionar tag:', error);
+  }
+};
+
+export const removerTagDoUsuario = async (userId, tag) => {
+  try {
+    const response = await fetch(`http://localhost:5000/user/${userId}/tags`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ tag }),
+    });
+    return response.json();
+  } catch (error) {
+    console.error('Erro ao remover tag:', error);
+  }
+};
+
+export const fetchUsers = async () => {
+  try {
+    const response = await fetch('http://localhost:5000/user', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        
+      }
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Erro ao buscar usuários:', error);
+  }
+};

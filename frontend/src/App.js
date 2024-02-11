@@ -8,6 +8,8 @@ import SignUp from './SignUp';
 import Cart from './Cart';
 import { CartProvider } from './CartContext';
 import DetalhesRestaurantes from './DetalhesRestaurantes';
+import GestãoDeUSuários from './GestãoDeUsuários'
+import Restaurantes from './Restaurantes';
 
 
 function App() {
@@ -22,7 +24,8 @@ function App() {
           <Route path="/" element={<DetalhesPPRestaurante />}/>
           <Route path='/Restaurante/:id'  element={<DetalhesRestaurantes/>}/>
           <Route path="/Cart" element={<Cart/>}/>
-        
+          <Route path="/Restaurantes" element={<Restaurantes/>}/>
+          <Route path="/GestãoDeUSuários" element={<GestãoDeUSuários/>}/>
         </Routes>
         </CartProvider>
       </BrowserRouter>

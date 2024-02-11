@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './DetalhesPPRestaurante.css';
 import { getTodosOsRestaurantes } from './LoginFuncao'
 import { useNavigate } from 'react-router-dom';
+import { adicionarTagAoUsuario, removerTagDoUsuario, obterAtividadeDeCompra } from './LoginFuncao';
 
 
 

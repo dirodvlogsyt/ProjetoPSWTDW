@@ -1,29 +1,42 @@
-import React, { useState, useContext } from 'react';
-import CartContext from './CartContext';
-import './Cart.css';
+import React, { useContext } from 'react';
+import CartContext from './CartContext'; 
 
 const Cart = () => {
-  const { items, removeItem, clearCart } = useContext(CartContext); 
+  const { items, removeItemFromCart, increaseQuantity, decreaseQuantity } = useContext(CartContext);
 
-  const handleCheckout = () => {
- 
-    console.log('Procedendo ao pagamento...');
+  const handleRemoveItem = (id) => {
+    removeItemFromCart(id);
+  };
+
+  const handleIncreaseQuantity = (id) => {
+    increaseQuantity(id);
+  };
+
+  const handleDecreaseQuantity = (id) => {
+    decreaseQuantity(id);
   };
 
   return (
     <div className="cart-container">
-      <h2>Carrinho de Compras</h2>
-      {items.length === 0 && <p>O carrinho está vazio.</p>}
-      {items.map((item, index) => (
-        <div key={index} className="cart-item">
-          <span>{item.name}</span>
-          <span>{item.price}</span>
-          <button onClick={() => removeItem(item.id)}>Remover</button>
+    {items.length === 0 ? (
+      <p className="cart-empty-message">O carrinho está vazio.</p>
+    ) : (
+      items.map((item) => (
+        <div className="cart-item" key={item.id}>
+          <span className="item-name">{item.name}</span>
+          <div className="quantity-adjust">
+            <button onClick={() => handleDecreaseQuantity(item.id)}>-</button>
+            <span className="item-quantity">{item.amount}</span>
+            <button onClick={() => handleIncreaseQuantity(item.id)}>+</button>
+          </div>
+          <button className="remove-item-button" onClick={() => handleRemoveItem(item.id)}>
+            Remover
+          </button>
         </div>
-      ))}
-      <button type="limpar" onClick={clearCart}>Limpar Carrinho</button>
-      <button type="checkout" onClick={handleCheckout}>Checkout</button>
-    </div>
+      ))
+    )}
+  </div>
+  
   );
 };
 

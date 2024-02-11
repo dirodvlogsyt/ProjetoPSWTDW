@@ -1,43 +1,69 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import './DetalhesRestaurante.css';
-
+import { buscarCardapio, buscarOpcoesDoItem } from './LoginFuncao'; 
+import CartContext from './CartContext';
+import ModalOpcoes from './ModalOpcoes'; 
 function DetalhesRestaurantes() {
-  const { id } = useParams();
-  const [restaurante, setRestaurante] = useState(null);
-  const [cardapio, setCardapio] = useState([]); 
+  let { id } = useParams();
+  const [cardapio, setCardapio] = useState([]);
+  const [detalhesRestaurante, setDetalhesRestaurante] = useState(null);
+  const [selecionado, setSelecionado] = useState(null);
+  const [opcoes, setOpcoes] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { addItemToCart } = useContext(CartContext);
 
-  
   useEffect(() => {
-    fetch(`sua_api/restaurantes/${id}`) 
-      .then(res => res.json())
-      .then(data => {
-        setRestaurante(data); 
-        fetch(`sua_api/cardapio/${data.cardapioId}`) 
-          .then(res => res.json())
-          .then(data => setCardapio(data)); 
-      })
-      .catch(erro => console.error('Erro:', erro));
+    buscarCardapio(id).then(dados => {
+      setDetalhesRestaurante(dados.restaurante);
+      setCardapio(dados.cardapio);
+    });
   }, [id]);
 
-  
-  if (!restaurante) return <div>Carregando...</div>; 
+  const abrirModal = (item) => {
+    setSelecionado(item);
+    buscarOpcoesDoItem(item.id)
+      .then(opcoesDoItem => {
+        setOpcoes(opcoesDoItem);
+        setIsModalOpen(true);
+      })
+      .catch(error => {
+        console.error("Não foi possível buscar as opções do item: ", error);
+      });
+  };
 
- 
+  const fecharModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const adicionarAoCarrinho = (itemComOpcoes) => {
+    addItemToCart(itemComOpcoes);
+    fecharModal();
+  };
+
+  if (!detalhesRestaurante) {
+    return <div>Carregando detalhes do restaurante...</div>;
+  }
+
   return (
-    <div className="detalhes-container">
-      <h1>{restaurante.nome}</h1>
-      
-      <div className="cardapio-container">
-        {cardapio.map(item => (
-          <div key={item._id} className="cardapio-item">
-            <h3>{item.nome}</h3>
-            <p>{item.descricao}</p>
-            <p>Preço: {item.preco}</p>
-            
-          </div>
+    <div>
+      <h1>{detalhesRestaurante.nome}</h1>
+      <p>{detalhesRestaurante.descricao}</p>
+      <h2>Cardápio</h2>
+      <ul>
+        {cardapio.map((item) => (
+          <li key={item.id} onClick={() => abrirModal(item)}>
+            {item.nome} - {item.preco}€
+          </li>
         ))}
-      </div>
+      </ul>
+      {isModalOpen && (
+        <ModalOpcoes
+          item={selecionado}
+          opcoes={opcoes}
+          onAddToCart={adicionarAoCarrinho}
+          onClose={fecharModal}
+        />
+      )}
     </div>
   );
 }
